@@ -2,6 +2,7 @@
 	"name": "nuxt-app",
 	"private": true,
 	"scripts": {
+		"prebuild": "[[ $CI = true ]] && npx pnpm@3 install  --store=node_modules/.pnpm-store || echo skiping pnpm install",
 		"build": "nuxt build",
 		"dev": "nuxt dev",
 		"generate": "nuxt generate",

@@ -206,3 +206,37 @@ yarn preview
 ```
 
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+
+# PRODUCTION
+
+https://docs.netlify.com/integrations/frameworks/nuxt/#app
+
+## Need to add packageManager for pnpm and nuxt to package.json
+
+```
+"nuxt": {
+    "target": "static"
+  },
+  "packageManager": "pnpm@6.3.2"
+```
+
+## ADDED to NUXT.CONFIG.TS
+
+$production: {
+routeRules: {
+'/\*\*': { isr: true },
+},
+},
+$development: {
+//
+},
+
+## Needed to add PNPM_FLAGS ENVIRONMENT VARIABLE on NETLIFY
+
+PNPM_FLAGS = --shamefully-hoist
+NPM_FLAGS = --prefix=/
+
+## Added Prebuild to package.json
+
+https://answers.netlify.com/t/using-pnpm-and-pnpm-workspaces/2759
+"prebuild": "[[$CI = true]] && npx pnpm@3 install -r --store=node_modules/.pnpm-store || echo skiping pnpm install"
