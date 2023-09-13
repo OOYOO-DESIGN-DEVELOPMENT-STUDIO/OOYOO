@@ -2,6 +2,14 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
 	// devtools: { enabled: true },
+	$production: {
+		routeRules: {
+			'/**': { isr: true },
+		},
+	},
+	$development: {
+		//
+	},
 	modules: [
 		'@nuxtjs/tailwindcss',
 		'nuxt-icon',
